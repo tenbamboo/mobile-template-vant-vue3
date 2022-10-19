@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "lokalise.i18n-ally",
+    "octref.vetur",
+    "shenjiaolong.vue-helper",
+    "tabnine.tabnine-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}
