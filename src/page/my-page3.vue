@@ -1,6 +1,8 @@
 <template>
   <div class="goods">
     {{title}}{{userCounter.count}}{{userCounter.double}}
+    <my-com1 v-model="myCom1Value" :user-info="userInfo" @change="myCom1Change"></my-com1>
+    <hr/>
     <van-swipe class="goods-swipe"
       :autoplay="3000">
       <van-swipe-item v-for="thumb in goods.thumb"
@@ -66,10 +68,16 @@
 
 <script setup>
 import { Toast } from 'vant';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { useCounterStore } from '@/config/store/simple';
+import { getCurrentUser } from './service';
+import MyCom1 from '@/components/my-com1.vue';
 
 const title = import.meta.env.VITE_APP_TITLE;
+const myCom1Value = ref('');
+const userInfo = reactive({
+  userId: '1',
+});
 
 const userCounter = useCounterStore();
 
@@ -84,6 +92,10 @@ const goods = reactive({
   ],
 });
 
+getCurrentUser().then((res) => {
+  console.log('getCurrentUser', res);
+});
+
 function formatPrice() {
   return `¥${(goods.price / 100).toFixed(2)}`;
 }
@@ -95,6 +107,10 @@ function onClickCart() {
 
 function sorry() {
   Toast('暂无后续逻辑~');
+}
+
+function myCom1Change(val) {
+  console.log('change', val);
 }
 </script>
 
